@@ -89,7 +89,7 @@ const TestimonialsMarquee = () => {
         }
         .animate-scroll {
           display: flex;
-          animation: scroll 35s linear infinite;
+          animation: scroll 60s linear infinite;
           width: ${testimonials.length * 400}px; /* Adjust width based on number of testimonials */
         }
         .animate-scroll:hover {

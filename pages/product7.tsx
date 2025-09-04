@@ -18,3 +18,4 @@ export default function Product7Page() {
     </>
   );
 }
+

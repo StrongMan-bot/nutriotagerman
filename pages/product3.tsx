@@ -18,3 +18,4 @@ export default function Product3Page() {
     </>
   );
 }
+
