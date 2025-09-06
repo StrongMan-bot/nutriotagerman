@@ -11,9 +11,7 @@ export default function Product1Page() {
         <meta name="keywords" content="chromium picolinate, blood sugar support, energy metabolism, dietary supplement, Nutriota, minerals" />
       </Head>
       <ProductDetail 
-        productId={1}
-        amazonLink="https://www.amazon.it/dp/B0C8G7Y1D6"
-        productImage="https://m.media-amazon.com/images/I/61OkL2nfd2L._AC_SX679_.jpg"
+        productId="1"
       />
     </>
   );

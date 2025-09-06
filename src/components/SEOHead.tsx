@@ -147,7 +147,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     }
     canonical.setAttribute('href', currentUrl);
 
-  }, [seoData.title, seoData.description, seoData.keywords, seoData.image, currentUrl]);
+  }, [seoData.title, seoData.description, seoData.keywords, seoData.image, currentUrl, i18n.language]);
 
   return null;
 };

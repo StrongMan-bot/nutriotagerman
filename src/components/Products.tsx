@@ -1,175 +1,285 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, memo } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 import OptimizedImage from './OptimizedImage';
 
 import { Star, ExternalLink } from 'lucide-react'; // Import Star and ExternalLink icons
 
+// Memoized ProductCard component for better performance
+const ProductCard = memo(({ product, index, t, router, renderStars, bestSellerProducts }: {
+  product: any;
+  index: number;
+  t: any;
+  router: any;
+  renderStars: (rating: number) => React.ReactNode;
+  bestSellerProducts: string[];
+}) => {
+  const handleProductClick = useCallback(() => {
+    router.push(`/product${index + 1}`);
+  }, [router, index]);
+
+  return (
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
+      <div 
+        className="relative h-48 lg:h-64 overflow-hidden cursor-pointer"
+        onClick={handleProductClick}
+      >
+        <OptimizedImage
+          src={product.image}
+          alt={product.name}
+          className="w-full h-full object-contain p-4"
+          loading="lazy"
+        />
+        <div className="absolute top-4 right-4">
+          <span className="bg-blue-100 text-[#0089CF] px-2 py-1 rounded-full text-xs font-medium">
+            {product.category === 'Vitamins' ? t('vitamins') : 
+             product.category === 'Supplements' ? t('supplements') : 
+             product.category === 'Herbal Supplements' ? t('herbalSupplements') : product.category}
+          </span>
+        </div>
+        
+        {/* Best Seller Badge */}
+        {bestSellerProducts.includes(product.name) && (
+          <div className="absolute top-4 left-4">
+            <span className="bg-[#0089CF] text-white px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+              <Star size={12} className="fill-current" />
+              {t('bestSeller')}
+            </span>
+          </div>
+        )}
+      </div>
+      
+      <div className="p-4 lg:p-6">
+        <h3 
+          className="text-sm lg:text-base font-semibold text-gray-900 mb-3 line-clamp-2 cursor-pointer hover:text-[#0089CF] transition-colors"
+          onClick={handleProductClick}
+        >
+          {product.name}
+        </h3>
+        
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-lg lg:text-xl font-bold text-[#0089CF]">
+              {product.price}
+            </span>
+            <a
+              href={product.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#0089CF] hover:bg-[#0070A3] text-white px-2 lg:px-3 py-1 lg:py-1.5 rounded-md text-xs font-medium transition-colors duration-200 flex items-center gap-1"
+            >
+              <ExternalLink size={12} />
+              {t('buyOnAmazon')}
+            </a>
+          </div>
+          
+          {/* Star Rating */}
+          <div className="flex items-center gap-2">
+            <div className="flex items-center">
+              {renderStars(product.rating)}
+            </div>
+            <span className="text-xs text-gray-600">
+              {product.reviews}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+});
+
+ProductCard.displayName = 'ProductCard';
+
 const Products = () => {
   const { t, i18n } = useTranslation('products');
   const router = useRouter();
   const { search, category } = router.query;
-  const [selectedCategory, setSelectedCategory] = useState(t('allProducts'));
-  const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState('All Products');
+  const [isNavigating, setIsNavigating] = useState(false);
 
   // List of best seller product names
   const bestSellerProducts = [
-    "Nutriota Chromium Picolinate | 250 mcg (365 Tablets)",
-    "Nutriota Propolis | 1000 mg (180 Capsules)",
-    "Nutriota Alpha Lipoic Acid | 500 mg (180 Capsules)",
-    "Nutriota Echinacea | 500 mg (240 Tablets)"
+    "Nutriota Alpha Lipoic Acid 500 mg 180 Capsules",
+    "Nutriota Propolis 1000 mg 180 Tablets",
+    "Nutriota Vitamin B6 12.5 mg 365 Tablets",
+    "Nutriota Echinacea 500 mg 240 Tablets",
+    "Nutriota Vitamin B3 (Nicotinamide) 500 mg 180 Capsules"
   ];
 
   // Product data from JSON with ratings added
-  const products = [
+  const products = useMemo(() => [
     {
-      "id": 1,
-      "category": t('minerals'),
-      "name": "Nutriota Chromium Picolinate | 250 mcg (365 Tablets)",
-      "price": "€23.79",
-      "image": "https://m.media-amazon.com/images/I/61OkL2nfd2L._AC_SX679_.jpg",
-      "link": "https://www.amazon.it/dp/B0C8G7Y1D6",
+      "category": "Supplements",
+      "name": "Nutriota Alpha Lipoic Acid 500 mg 180 Capsules",
+      "price": "€30.27",
+      "image": "https://m.media-amazon.com/images/I/612BT9dEe5L._AC_SX522_.jpg",
+      "link": "https://www.amazon.de/dp/B081D13S3P",
+      "rating": 4.5,
+      "reviews": "400+ " + t('ratings')
+    },
+    {
+      "category": "Vitamins",
+      "name": "Nutriota Vitamin B1 (Thiamine) 250 mg 180 Capsules",
+      "price": "€20.17",
+      "image": "https://m.media-amazon.com/images/I/61x3qasoXDL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "link": "https://www.amazon.de/dp/B0CKTYJJ4M",
+      "rating": 4.6,
+      "reviews": "150+ " + t('ratings')
+    },
+    {
+      "category": "Supplements",
+      "name": "Nutriota Propolis 2000 mg 180 Tablets",
+      "price": "€18.15",
+      "image": "https://m.media-amazon.com/images/I/610Xy2Pk7DL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "link": "https://www.amazon.de/dp/B08428DH3Z",
       "rating": 4.5,
       "reviews": "300+ " + t('ratings')
     },
     {
-      "id": 2,
-      "category": t('vitamins'),
-      "name": "Nutriota Vitamin B6 |10 mg (180 Capsules)",
-      "price": "€15.95",
-      "image": "https://m.media-amazon.com/images/I/61y0r7qxl7L.__AC_SX300_SY300_QL70_ML2_.jpg",
-      "link": "https://www.amazon.it/dp/B0CNKNC88Z",
-      "rating": 4.5,
+      "category": "Vitamins",
+      "name": "Nutriota Vitamin B6 12.5 mg 365 Tablets",
+      "price": "€14.03",
+      "image": "https://m.media-amazon.com/images/I/51d2cbMwKkL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "link": "https://www.amazon.de/dp/B08B121XGR",
+      "rating": 4.6,
+      "reviews": "300+ " + t('ratings')
+    },
+    {
+      "category": "Vitamins",
+      "name": "Nutriota Vitamin B1 (Thiamine) 100 mg 180 Capsules",
+      "price": "€12.11",
+      "image": "https://m.media-amazon.com/images/I/61aqUq5-yfL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "link": "https://www.amazon.de/dp/B0D673DJR7",
+      "rating": 4.6,
       "reviews": "100+ " + t('ratings')
     },
     {
-      "id": 3,
-      "category": t('vitamins'),
-      "name": "Nutriota Vitamin B3 (Nicotinamide) | 54 mg (180 Capsules)",
-      "price": "€13.90",
-      "image": "https://m.media-amazon.com/images/I/61zrLu+FSbL._AC_SY300_SX300_.jpg",
-      "link": "https://www.amazon.it/dp/B0CK4XFPP9",
-      "rating": 4.4,
-      "reviews": "100+ " + t('ratings')
-    },
-    {
-      "id": 4,
-      "category": t('supplements'),
-      "name": "Nutriota Propolis | 1000 mg (180 Capsules)",
-      "price": "€17.79",
-      "image": "https://m.media-amazon.com/images/I/617gq7K4abL.__AC_SX300_SY300_QL70_ML2_.jpg",
-      "link": "https://www.amazon.it/dp/B08TB387M9",
-      "rating": 4.3,
-      "reviews": "200+ " + t('ratings')
-    },
-    {
-      "id": 5,
-      "category": t('supplements'),
-      "name": "Nutriota Alpha Lipoic Acid | 500 mg (180 Capsules)",
-      "price": "€29.90",
-      "image": "https://m.media-amazon.com/images/I/61GtNp-NvGL.__AC_SX300_SY300_QL70_ML2_.jpg",
-      "link": "https://www.amazon.it/dp/B081D2SPVF",
-      "rating": 4.5,
-      "reviews": "650+ " + t('ratings')
-    },
-    {
-      "id": 6,
-      "category": t('vitamins'),
-      "name": "Nutriota Vitamin B1 | 25 mg (180 Capsules)",
-      "price": "€11.99",
-      "image": "https://m.media-amazon.com/images/I/61VsBeBnpML.__AC_SX300_SY300_QL70_ML2_.jpg",
-      "link": "https://www.amazon.it/dp/B0CNKKJF5M",
-      "rating": 4.5,
-      "reviews": "100+ " + t('ratings')
-    },
-    {
-      "id": 7,
-      "category": t('herbalSupplements'),
-      "name": "Nutriota Echinacea | 500 mg (240 Tablets)",
-      "price": "€19.79",
-      "image": "https://m.media-amazon.com/images/I/61330aWtIEL.__AC_SX300_SY300_QL70_ML2_.jpg",
-      "link": "https://www.amazon.it/dp/B09PNK3GRH",
-      "rating": 4.5,
-      "reviews": "150+ " + t('ratings')
-    },
-    {
-      "id": 8,
-      "category": t('minerals'),
-      "name": "Nutriota Selencora (Selenium w/ Zinc and Copper) | (180 Capsules)",
-      "price": "€10.99",
-      "image": "https://m.media-amazon.com/images/I/61Sdenl4g5L.__AC_SX300_SY300_QL70_ML2_.jpg",
-      "link": "https://www.amazon.it/dp/B0CT64JJ1N",
-      "rating": 4.4,
+      "category": "Vitamins",
+      "name": "Nutriota Vitamin B1 (Thiamine) 200 mg 180 Tablets",
+      "price": "€14.12",
+      "image": "https://m.media-amazon.com/images/I/51xKfXcSPDL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "link": "https://www.amazon.de/dp/B0D5XYTPXD",
+      "rating": 4.6,
       "reviews": "50+ " + t('ratings')
     },
     {
-      "id": 9,
-      "category": t('supplements'),
-      "name": "Nutriota Royal Jelly | 250 mg (120 Capsules)",
-      "price": "€24.99",
-      "image": "https://m.media-amazon.com/images/I/61o7Po1LO5L.__AC_SX300_SY300_QL70_ML2_.jpg",
-      "link": "https://www.amazon.it/dp/B08W44Q351",
+      "category": "Supplements",
+      "name": "Nutriota Propolis 2000 mg 90 Capsules",
+      "price": "€16.95",
+      "image": "https://m.media-amazon.com/images/I/61ZO2+TLSPL._AC_SY300_SX300_.jpg",
+      "link": "https://www.amazon.de/dp/B09L3SH83Z",
       "rating": 4.4,
       "reviews": "150+ " + t('ratings')
+    },
+    {
+      "category": "Herbal Supplements",
+      "name": "Nutriota Echinacea 500 mg 240 Tablets",
+      "price": "€20.17",
+      "image": "https://m.media-amazon.com/images/I/6175SKfTVaL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "link": "https://www.amazon.de/dp/B08B16GMQ3",
+      "rating": 4.6,
+      "reviews": "250+ " + t('ratings')
+    },
+    {
+      "category": "Vitamins",
+      "name": "Nutriota Vitamin B3 (Nicotinamide) 500 mg 180 Capsules",
+      "price": "€18.07",
+      "image": "https://m.media-amazon.com/images/I/61UTpl0xAOL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "link": "https://www.amazon.de/dp/B0845TMGBN",
+      "rating": 4.5,
+      "reviews": "200+ " + t('ratings')
+    },
+    {
+      "category": "Supplements",
+      "name": "Nutriota ZMA (Zinc (10 mg) + Magnesium (187.5 mg) + Vitamin B6 (6 mg)) 120 Capsules",
+      "price": "€9.98",
+      "image": "https://m.media-amazon.com/images/I/61-RHjTQvaL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "link": "https://www.amazon.de/dp/B0DGMD369V",
+      "rating": 4.6,
+      "reviews": "50+ " + t('ratings')
+    },
+    {
+      "category": "Vitamins",
+      "name": "Nutriota Vitamin B2 (Riboflavin) 250 mg 180 Capsules",
+      "price": "€30.27",
+      "image": "https://m.media-amazon.com/images/I/61dMCF-WIdL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "link": "https://www.amazon.de/dp/B0CXJ3CK9K",
+      "rating": 4.6,
+      "reviews": "50+ " + t('ratings')
+    },
+    {
+      "category": "Supplements",
+      "name": "Nutriota Shilajit 1500 mg 180 Capsules",
+      "price": "€22.45",
+      "image": "https://m.media-amazon.com/images/I/61qXpAC5jlL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "link": "https://www.amazon.de/dp/B0D1RBLDZS",
+      "rating": 4.2,
+      "reviews": "50+ " + t('ratings')
+    },
+    {
+      "category": "Supplements",
+      "name": "Nutriota Silica 250 mg (120 Capsules)",
+      "price": "€25.23",
+      "image": "https://m.media-amazon.com/images/I/61LsVX06PkL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "link": "https://www.amazon.de/dp/B09ZVP7LCM",
+      "rating": 4.2,
+      "reviews": "40+ " + t('ratings')
+    },
+    {
+      "category": "Vitamins",
+      "name": "Nutriota Vitamin B5 (Pantothenic Acid) 500 mg 120 Capsules",
+      "price": "€25.23",
+      "image": "https://m.media-amazon.com/images/I/61L25cJYjoL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "link": "https://www.amazon.de/dp/B0D4LZ9WBC",
+      "rating": 4.4,
+      "reviews": "30+ " + t('ratings')
     }
-  ];
+  ], [t]);
 
-  const categories = [t('allProducts'), t('minerals'), t('vitamins'), t('supplements'), t('herbalSupplements')];
+  const categories = useMemo(() => ['All Products', 'Vitamins', 'Supplements', 'Herbal Supplements'], []);
+
+  // Memoize filtered products to prevent unnecessary recalculations
+  const filteredProducts = useMemo(() => {
+    if (selectedCategory === 'All Products') {
+      return products;
+    }
+    return products.filter(product => product.category === selectedCategory);
+  }, [selectedCategory, products]);
 
   // Handle category filtering from URL params
   useEffect(() => {
-    if (category) {
-      // Map URL category to translated category
-      const categoryMap: { [key: string]: string } = {
-        'All Products': t('allProducts'),
-        'Minerals': t('minerals'),
-        'Vitamins': t('vitamins'),
-        'Supplements': t('supplements'),
-        'Herbal Supplements': t('herbalSupplements')
-      };
-      
-      const translatedCategory = categoryMap[category as string];
-      if (translatedCategory) {
-        setSelectedCategory(translatedCategory);
-      }
+    if (category && categories.includes(category as string)) {
+      setSelectedCategory(category as string);
     }
-  }, [category, t]);
-
-  // Filter products based on selected category
-  useEffect(() => {
-    if (selectedCategory === t('allProducts')) {
-      setFilteredProducts(products);
-    } else {
-      setFilteredProducts(products.filter(product => product.category === selectedCategory));
-    }
-  }, [selectedCategory, t]);
+  }, [category, categories]);
 
   // Scroll to top when category changes
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [selectedCategory]);
 
-  const handleCategoryClick = (category: string) => {
+  const handleCategoryClick = useCallback(async (category: string) => {
+    // Prevent multiple rapid clicks
+    if (isNavigating || selectedCategory === category) return;
+    
+    setIsNavigating(true);
     setSelectedCategory(category);
-    if (category === t('allProducts')) {
-      router.push('/products');
-    } else {
-      // Map translated category back to English for URL
-      const reverseCategoryMap: { [key: string]: string } = {
-        [t('allProducts')]: 'All Products',
-        [t('minerals')]: 'Minerals',
-        [t('vitamins')]: 'Vitamins',
-        [t('supplements')]: 'Supplements',
-        [t('herbalSupplements')]: 'Herbal Supplements'
-      };
-      const englishCategory = reverseCategoryMap[category] || category;
-      router.push(`/products?category=${encodeURIComponent(englishCategory)}`);
+    
+    try {
+      if (category === 'All Products') {
+        await router.push('/products', undefined, { shallow: true });
+      } else {
+        await router.push(`/products?category=${encodeURIComponent(category)}`, undefined, { shallow: true });
+      }
+    } catch (error) {
+      console.error('Navigation error:', error);
+    } finally {
+      setIsNavigating(false);
     }
-  };
+  }, [isNavigating, selectedCategory, router]);
 
-  // Function to render stars based on rating
-  const renderStars = (rating: number) => {
+  // Memoized function to render stars based on rating
+  const renderStars = useCallback((rating: number) => {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 !== 0;
     const stars = [];
@@ -189,7 +299,7 @@ const Products = () => {
     }
 
     return stars;
-  };
+  }, []);
 
   return (
     <div className="products-page min-h-screen bg-gray-50 pt-20">
@@ -205,13 +315,17 @@ const Products = () => {
                   <button
                     key={category}
                     onClick={() => handleCategoryClick(category)}
+                    disabled={isNavigating}
                     className={`w-full text-left px-3 lg:px-4 py-2 lg:py-3 rounded-lg font-medium transition-all duration-200 text-sm lg:text-base ${
                       selectedCategory === category
                         ? 'bg-[#0089CF] text-white shadow-md'
                         : 'text-gray-700 hover:bg-blue-50 hover:text-[#0089CF]'
-                    }`}
+                    } ${isNavigating ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
                   >
-                    {category}
+                    {category === 'All Products' ? t('allProducts') : 
+                     category === 'Vitamins' ? t('vitamins') : 
+                     category === 'Supplements' ? t('supplements') : 
+                     category === 'Herbal Supplements' ? t('herbalSupplements') : category}
                   </button>
                 ))}
               </div>
@@ -222,12 +336,18 @@ const Products = () => {
           <div className="flex-1">
             <div className="mb-8">
               <h1 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">
-                {selectedCategory}
+                {selectedCategory === 'All Products' ? t('allProducts') : 
+                 selectedCategory === 'Vitamins' ? t('vitamins') : 
+                 selectedCategory === 'Supplements' ? t('supplements') : 
+                 selectedCategory === 'Herbal Supplements' ? t('herbalSupplements') : selectedCategory}
               </h1>
               <p className="text-sm lg:text-base text-gray-600">
-                {selectedCategory === t('allProducts') 
+                {selectedCategory === 'All Products' 
                   ? t('showingAll', { count: filteredProducts.length })
-                  : t('showingCategory', { count: filteredProducts.length, category: selectedCategory })
+                  : t('showingCategory', { count: filteredProducts.length, category: 
+                    selectedCategory === 'Vitamins' ? t('vitamins') : 
+                    selectedCategory === 'Supplements' ? t('supplements') : 
+                    selectedCategory === 'Herbal Supplements' ? t('herbalSupplements') : selectedCategory })
                 }
               </p>
             </div>
@@ -235,72 +355,15 @@ const Products = () => {
             {/* Products Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
               {filteredProducts.map((product, index) => (
-                <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
-                  {/* Image - Clickable */}
-                  <Link href={`/product${product.id}`} className="block hover:opacity-80 transition-opacity duration-200">
-                    <div className="relative h-48 lg:h-64 overflow-hidden">
-                      <OptimizedImage
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full h-full object-contain p-4"
-                        loading="lazy"
-                      />
-                      <div className="absolute top-4 right-4">
-                        <span className="bg-blue-100 text-[#0089CF] px-2 py-1 rounded-full text-xs font-medium">
-                          {product.category}
-                        </span>
-                      </div>
-                      
-                      {/* Best Seller Badge */}
-                      {bestSellerProducts.includes(product.name) && (
-                        <div className="absolute top-4 left-4">
-                          <span className="bg-[#0089CF] text-white px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1">
-                            <Star size={12} className="fill-current" />
-                            {t('bestSeller')}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  </Link>
-                  
-                  {/* Content area - Not clickable except for product name */}
-                  <div className="p-4 lg:p-6">
-                    {/* Product name - Clickable */}
-                    <Link href={`/product${product.id}`} className="block">
-                      <h3 className="text-sm lg:text-base font-semibold text-gray-900 mb-3 line-clamp-2 hover:text-[#0089CF] transition-colors duration-200 cursor-pointer">
-                        {product.name}
-                      </h3>
-                    </Link>
-                    
-                    {/* Price, Amazon button, and ratings - Not clickable */}
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between">
-                        <span className="text-lg lg:text-xl font-bold text-[#0089CF]">
-                          {product.price}
-                        </span>
-                        <a
-                          href={product.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="bg-[#0089CF] hover:bg-[#0070A3] text-white px-2 lg:px-3 py-1 lg:py-1.5 rounded-md text-xs font-medium transition-colors duration-200 flex items-center gap-1"
-                        >
-                          <ExternalLink size={12} />
-                          {t('buyOnAmazon')}
-                        </a>
-                      </div>
-                      
-                      {/* Star Rating */}
-                      <div className="flex items-center gap-2">
-                        <div className="flex items-center">
-                          {renderStars(product.rating)}
-                        </div>
-                        <span className="text-xs text-gray-600">
-                          {product.reviews}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <ProductCard
+                  key={`${product.name}-${index}`}
+                  product={product}
+                  index={index}
+                  t={t}
+                  router={router}
+                  renderStars={renderStars}
+                  bestSellerProducts={bestSellerProducts}
+                />
               ))}
             </div>
 

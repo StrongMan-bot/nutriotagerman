@@ -11,9 +11,7 @@ export default function Product3Page() {
         <meta name="keywords" content="vitamin b3, nicotinamide, cellular energy, skin health, dietary supplement, Nutriota, vitamins" />
       </Head>
       <ProductDetail 
-        productId={3}
-        amazonLink="https://www.amazon.it/dp/B0CK4XFPP9"
-        productImage="https://m.media-amazon.com/images/I/61zrLu+FSbL._AC_SY300_SX300_.jpg"
+        productId="3"
       />
     </>
   );

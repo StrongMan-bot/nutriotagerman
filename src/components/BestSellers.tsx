@@ -1,54 +1,69 @@
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Star, ExternalLink } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useRouter } from 'next/router';
 import OptimizedImage from './OptimizedImage';
-import Link from 'next/link';
 
 const BestSellers = () => {
   const { t } = useTranslation();
+  const router = useRouter();
 
-  const bestSellerProducts = [
+  const bestSellerProducts = useMemo(() => [
     {
-      id: 5,
-      name: "Nutriota Alpha Lipoic Acid | 500 mg (180 Capsules)",
-      price: "€29.90",
-      image: "https://m.media-amazon.com/images/I/61GtNp-NvGL.__AC_SX300_SY300_QL70_ML2_.jpg",
-      link: "https://www.amazon.it/dp/B081D2SPVF",
+      id: 1,
+      name: "Nutriota Alpha Lipoic Acid 500 mg 180 Capsules",
+      price: "€30.27",
+      image: "https://m.media-amazon.com/images/I/612BT9dEe5L._AC_SX522_.jpg",
+      link: "https://www.amazon.de/dp/B081D13S3P",
       rating: 4.5,
-      reviews: "650+ " + t('products.ratings'),
+      reviews: "400+ " + t('products.ratings'),
       category: t('products.supplements')
     },
     {
-      id: 1,
-      name: "Nutriota Chromium Picolinate | 250 mcg (365 Tablets)",
-      price: "€23.79",
-      image: "https://m.media-amazon.com/images/I/61OkL2nfd2L._AC_SX679_.jpg",
-      link: "https://www.amazon.it/dp/B0C8G7Y1D6",
+      id: 3,
+      name: "Nutriota Propolis 2000 mg 180 Tablets",
+      price: "€18.15",
+      image: "https://m.media-amazon.com/images/I/610Xy2Pk7DL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      link: "https://www.amazon.de/dp/B08428DH3Z",
       rating: 4.5,
       reviews: "300+ " + t('products.ratings'),
-      category: t('products.minerals')
+      category: t('products.supplements')
     },
     {
       id: 4,
-      name: "Nutriota Propolis | 1000 mg (180 Capsules)",
-      price: "€17.79",
-      image: "https://m.media-amazon.com/images/I/617gq7K4abL.__AC_SX300_SY300_QL70_ML2_.jpg",
-      link: "https://www.amazon.it/dp/B08TB387M9",
-      rating: 4.3,
-      reviews: "200+ " + t('products.ratings'),
-      category: t('products.supplements')
+      name: "Nutriota Vitamin B6 12.5 mg 365 Tablets",
+      price: "€14.03",
+      image: "https://m.media-amazon.com/images/I/51d2cbMwKkL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      link: "https://www.amazon.de/dp/B08B121XGR",
+      rating: 4.6,
+      reviews: "300+ " + t('products.ratings'),
+      category: t('products.vitamins')
     },
     {
-      id: 7,
-      name: "Nutriota Echinacea | 500 mg (240 Tablets)",
-      price: "€19.79",
-      image: "https://m.media-amazon.com/images/I/61330aWtIEL.__AC_SX300_SY300_QL70_ML2_.jpg",
-      link: "https://www.amazon.it/dp/B09PNK3GRH",
-      rating: 4.5,
-      reviews: "150+ " + t('products.ratings'),
+      id: 8,
+      name: "Nutriota Echinacea 500 mg 240 Tablets",
+      price: "€20.17",
+      image: "https://m.media-amazon.com/images/I/6175SKfTVaL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      link: "https://www.amazon.de/dp/B08B16GMQ3",
+      rating: 4.6,
+      reviews: "250+ " + t('products.ratings'),
       category: t('products.herbalSupplements')
     }
-  ];
+  ], [t]);
+
+  // Preload critical images for better performance
+  useEffect(() => {
+    const preloadCriticalImages = async () => {
+      try {
+        // Preload all product images since they're all priority
+        const criticalImages = bestSellerProducts.map(product => product.image);
+      } catch (error) {
+        console.warn('Failed to preload some images:', error);
+      }
+    };
+
+    preloadCriticalImages();
+  }, [bestSellerProducts]);
 
   const renderStars = (rating: number) => {
     const fullStars = Math.floor(rating);
@@ -86,51 +101,49 @@ const BestSellers = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {bestSellerProducts.map((product, index) => (
             <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group border border-gray-100">
-              {/* Image - Clickable */}
-              <Link href={`/product${product.id}`} className="block hover:opacity-80 transition-opacity duration-200">
-                <div className="relative h-48 overflow-hidden">
-                  <OptimizedImage
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-contain p-4"
-                    loading="eager"
-                    priority={true}
-                  />
-                  <div className="absolute top-4 right-4">
-                    <span className="bg-blue-100 text-[#0089CF] px-2 py-1 rounded-full text-xs font-medium">
-                      {product.category}
-                    </span>
-                  </div>
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-[#0089CF] text-white px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1">
-                      <Star size={12} className="fill-current" />
-                      {t('products.bestSeller')}
-                    </span>
-                  </div>
+              <div 
+                className="relative h-48 overflow-hidden cursor-pointer"
+                onClick={() => router.push(`/product${product.id}`)}
+              >
+                <OptimizedImage
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-full object-contain p-4"
+                  loading={index < 4 ? "eager" : "lazy"}
+                  priority={index < 4}
+                />
+                <div className="absolute top-4 right-4">
+                  <span className="bg-blue-100 text-[#0089CF] px-2 py-1 rounded-full text-xs font-medium">
+                    {product.category}
+                  </span>
                 </div>
-              </Link>
+                <div className="absolute top-4 left-4">
+                  <span className="bg-[#0089CF] text-white px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+                    <Star size={12} className="fill-current" />
+                    {t('products.bestSeller')}
+                  </span>
+                </div>
+              </div>
               
-              {/* Content area - Not clickable except for product name */}
               <div className="p-6">
-                {/* Product name - Clickable */}
-                <Link href={`/product${product.id}`} className="block">
-                  <h3 className="text-base font-semibold text-gray-900 mb-3 line-clamp-2 hover:text-[#0089CF] transition-colors duration-200 cursor-pointer">
-                    {product.name}
-                  </h3>
-                </Link>
+                <h3 
+                  className="text-base font-semibold text-gray-900 mb-3 line-clamp-2 cursor-pointer hover:text-[#0089CF] transition-colors"
+                  onClick={() => router.push(`/product${product.id}`)}
+                >
+                  {product.name}
+                </h3>
                 
-                {/* Price, Amazon button, and ratings - Not clickable */}
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-xl font-bold text-[#0089CF]">
                       {product.price}
                     </span>
-                    {/* Buy on Amazon Button - Not part of product link */}
                     <a
                       href={product.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="bg-[#0089CF] hover:bg-[#0070A3] text-white px-3 py-1.5 rounded-md text-xs font-medium transition-colors duration-200 flex items-center justify-center gap-1"
+                      className="bg-[#0089CF] hover:bg-[#0070A3] text-white px-3 py-1.5 rounded-md text-xs font-medium transition-colors duration-200 flex items-center gap-1"
+                      onClick={(e) => e.stopPropagation()}
                     >
                       <ExternalLink size={12} />
                       {t('products.buyOnAmazon')}

@@ -11,9 +11,7 @@ export default function Product4Page() {
         <meta name="keywords" content="propolis, bee propolis, immune support, natural supplement, Nutriota, supplements" />
       </Head>
       <ProductDetail 
-        productId={4}
-        amazonLink="https://www.amazon.it/dp/B08TB387M9"
-        productImage="https://m.media-amazon.com/images/I/617gq7K4abL.__AC_SX300_SY300_QL70_ML2_.jpg"
+        productId="4"
       />
     </>
   );

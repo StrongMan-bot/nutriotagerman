@@ -11,9 +11,7 @@ export default function Product5Page() {
         <meta name="keywords" content="alpha lipoic acid, antioxidant, cellular energy, oxidative stress, dietary supplement, Nutriota, supplements" />
       </Head>
       <ProductDetail 
-        productId={5}
-        amazonLink="https://www.amazon.it/dp/B081D2SPVF"
-        productImage="https://m.media-amazon.com/images/I/61GtNp-NvGL.__AC_SX300_SY300_QL70_ML2_.jpg"
+        productId="5"
       />
     </>
   );

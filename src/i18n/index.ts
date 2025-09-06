@@ -2,74 +2,74 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-import it from './locales/it.json';
+import de from './locales/de.json';
 import en from './locales/en.json';
-import it_products from './locales/it_products.json';
+import de_products from './locales/de_products.json';
 import en_products from './locales/en_products.json';
-import it_news from './locales/it_news.json';
+import de_news from './locales/de_news.json';
 import en_news from './locales/en_news.json';
-import it_news0 from './locales/it_news0.json';
+import de_news0 from './locales/de_news0.json';
 import en_news0 from './locales/en_news0.json';
-import it_news1 from './locales/it_news1.json';
+import de_news1 from './locales/de_news1.json';
 import en_news1 from './locales/en_news1.json';
-import it_news2 from './locales/it_news2.json';
+import de_news2 from './locales/de_news2.json';
 import en_news2 from './locales/en_news2.json';
-import it_news3 from './locales/it_news3.json';
+import de_news3 from './locales/de_news3.json';
 import en_news3 from './locales/en_news3.json';
-import it_news4 from './locales/it_news4.json';
+import de_news4 from './locales/de_news4.json';
 import en_news4 from './locales/en_news4.json';
-import it_news5 from './locales/it_news5.json';
+import de_news5 from './locales/de_news5.json';
 import en_news5 from './locales/en_news5.json';
-import it_news6 from './locales/it_news6.json';
+import de_news6 from './locales/de_news6.json';
 import en_news6 from './locales/en_news6.json';
-import it_testimonial from './locales/it_testimonial.json';
+import de_testimonial from './locales/de_testimonial.json';
 import en_testimonial from './locales/en_testimonial.json';
-import it_learnnews from './locales/it_learnnews.json';
+import de_learnnews from './locales/de_learnnews.json';
 import en_learnnews from './locales/en_learnnews.json';
 
 // Import product translation files
-import it_product1 from './locales/it_product1.json';
+import de_product1 from './locales/de_product1.json';
 import en_product1 from './locales/en_product1.json';
-import it_product2 from './locales/it_product2.json';
+import de_product2 from './locales/de_product2.json';
 import en_product2 from './locales/en_product2.json';
-import it_product3 from './locales/it_product3.json';
+import de_product3 from './locales/de_product3.json';
 import en_product3 from './locales/en_product3.json';
-import it_product4 from './locales/it_product4.json';
+import de_product4 from './locales/de_product4.json';
 import en_product4 from './locales/en_product4.json';
-import it_product5 from './locales/it_product5.json';
+import de_product5 from './locales/de_product5.json';
 import en_product5 from './locales/en_product5.json';
-import it_product6 from './locales/it_product6.json';
+import de_product6 from './locales/de_product6.json';
 import en_product6 from './locales/en_product6.json';
-import it_product7 from './locales/it_product7.json';
+import de_product7 from './locales/de_product7.json';
 import en_product7 from './locales/en_product7.json';
-import it_product8 from './locales/it_product8.json';
+import de_product8 from './locales/de_product8.json';
 import en_product8 from './locales/en_product8.json';
-import it_product9 from './locales/it_product9.json';
+import de_product9 from './locales/de_product9.json';
 import en_product9 from './locales/en_product9.json';
 
 const resources = {
-  it: {
-    translation: it,
-    products: it_products,
-    news: it_news,
-    news0: it_news0,
-    news1: it_news1,
-    news2: it_news2,
-    news3: it_news3,
-    news4: it_news4,
-    news5: it_news5,
-    news6: it_news6,
-    testimonial: it_testimonial,
-    learnnews: it_learnnews,
-    product1: it_product1,
-    product2: it_product2,
-    product3: it_product3,
-    product4: it_product4,
-    product5: it_product5,
-    product6: it_product6,
-    product7: it_product7,
-    product8: it_product8,
-    product9: it_product9
+  de: {
+    translation: de,
+    products: de_products,
+    news: de_news,
+    news0: de_news0,
+    news1: de_news1,
+    news2: de_news2,
+    news3: de_news3,
+    news4: de_news4,
+    news5: de_news5,
+    news6: de_news6,
+    testimonial: de_testimonial,
+    learnnews: de_learnnews,
+    product1: de_product1,
+    product2: de_product2,
+    product3: de_product3,
+    product4: de_product4,
+    product5: de_product5,
+    product6: de_product6,
+    product7: de_product7,
+    product8: de_product8,
+    product9: de_product9
   },
   en: {
     translation: en,
@@ -102,7 +102,7 @@ i18n
   .init({
     resources,
     fallbackLng: 'en', // English fallback
-    lng: 'it', // Explicitly set Italian as default
+    lng: 'de', // Explicitly set German as default
     debug: false,
     
     // Ensure synchronous loading for react-snap

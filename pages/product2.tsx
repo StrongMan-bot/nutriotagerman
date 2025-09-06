@@ -11,9 +11,7 @@ export default function Product2Page() {
         <meta name="keywords" content="vitamin b6, pyridoxine, nervous system health, energy metabolism, dietary supplement, Nutriota, vitamins" />
       </Head>
       <ProductDetail 
-        productId={2}
-        amazonLink="https://www.amazon.it/dp/B0CNKNC88Z"
-        productImage="https://m.media-amazon.com/images/I/61y0r7qxl7L.__AC_SX300_SY300_QL70_ML2_.jpg"
+        productId="2"
       />
     </>
   );

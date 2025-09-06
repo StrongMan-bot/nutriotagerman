@@ -11,9 +11,7 @@ export default function Product7Page() {
         <meta name="keywords" content="echinacea, immune support, herbal supplement, natural health, Nutriota, herbal supplements" />
       </Head>
       <ProductDetail 
-        productId={7}
-        amazonLink="https://www.amazon.it/dp/B09PNK3GRH"
-        productImage="https://m.media-amazon.com/images/I/61330aWtIEL.__AC_SX300_SY300_QL70_ML2_.jpg"
+        productId="7"
       />
     </>
   );

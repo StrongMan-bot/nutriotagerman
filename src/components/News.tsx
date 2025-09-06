@@ -40,7 +40,7 @@ const News = () => {
       title: t('articles.article4.title'),
       description: t('articles.article4.description'),
       image: "/images/NewsDetail4.webp",
-      date: t('articles.article4.category'),
+      date: t('articles.article4.date'),
       category: t('articles.article4.category')
     },
     {

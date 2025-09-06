@@ -16,15 +16,11 @@ const Header = () => {
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [logoError, setLogoError] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState(() => {
-    // Initialize with Italian as default
-    const currentLang = i18n.language || 'it';
-    if (currentLang === 'it') {
-      return { code: 'it', name: 'Italiano', flag: '🇮🇹' };
-    } else if (currentLang === 'en') {
-      return { code: 'en', name: 'English', flag: '🇬🇧' };
-    } else {
-      return { code: 'it', name: 'Italiano', flag: '🇮🇹' };
-    }
+    // Initialize with German as default
+    const currentLang = i18n.language || 'de';
+    return currentLang === 'de' 
+      ? { code: 'de', name: 'Deutsch', flag: '🇩🇪' }
+      : { code: 'en', name: 'English', flag: '🇬🇧' };
   });
   const [isScrolled, setIsScrolled] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -47,12 +43,10 @@ const Header = () => {
       await i18n.changeLanguage(langCode);
       console.log('i18n language changed to:', langCode);
       
-      if (langCode === 'it') {
-        setSelectedLanguage({ code: 'it', name: 'Italiano', flag: '🇮🇹' });
-      } else if (langCode === 'en') {
-        setSelectedLanguage({ code: 'en', name: 'English', flag: '🇬🇧' });
+      if (langCode === 'de') {
+        setSelectedLanguage({ code: 'de', name: 'Deutsch', flag: '🇩🇪' });
       } else {
-        setSelectedLanguage({ code: 'it', name: 'Italiano', flag: '🇮🇹' });
+        setSelectedLanguage({ code: 'en', name: 'English', flag: '🇬🇧' });
       }
       
       console.log('Language state updated');
@@ -74,97 +68,85 @@ const Header = () => {
 
   // Update selected language when i18n language changes
   useEffect(() => {
-    const currentLang = i18n.language || 'it';
-    if (currentLang === 'it') {
-      setSelectedLanguage({ code: 'it', name: 'Italiano', flag: '🇮🇹' });
-    } else if (currentLang === 'en') {
-      setSelectedLanguage({ code: 'en', name: 'English', flag: '🇬🇧' });
+    const currentLang = i18n.language || 'de';
+    if (currentLang === 'de') {
+      setSelectedLanguage({ code: 'de', name: 'Deutsch', flag: '🇩🇪' });
     } else {
-      setSelectedLanguage({ code: 'it', name: 'Italiano', flag: '🇮🇹' });
+      setSelectedLanguage({ code: 'en', name: 'English', flag: '🇬🇧' });
     }
   }, [i18n.language]);
 
-  // Product data for search - UPDATED WITH NEW PRODUCTS
+  // Product data for search (limited to products with existing pages)
   const products = [
     {
-      "id": 1,
-      "category": t('products.minerals'),
-      "name": "Nutriota Chromium Picolinate | 250 mcg (365 Tablets)",
-      "price": "€23.79",
-      "image": "https://m.media-amazon.com/images/I/61OkL2nfd2L._AC_SX679_.jpg",
-      "link": "https://www.amazon.it/dp/B0C8G7Y1D6"
+      "category": "Supplements",
+      "name": "Nutriota Alpha Lipoic Acid 500 mg 180 Capsules by Nutriota",
+      "price": "€30.27",
+      "image": "https://m.media-amazon.com/images/I/612BT9dEe5L._AC_SX522_.jpg",
+      "link": "https://www.amazon.de/dp/B081D13S3P"
     },
     {
-      "id": 2,
-      "category": t('products.vitamins'),
-      "name": "Nutriota Vitamin B6 |10 mg (180 Capsules)",
-      "price": "€15.95",
-      "image": "https://m.media-amazon.com/images/I/61y0r7qxl7L.__AC_SX300_SY300_QL70_ML2_.jpg",
-      "link": "https://www.amazon.it/dp/B0CNKNC88Z"
+      "category": "Vitamins",
+      "name": "Nutriota Vitamin B1 (Thiamine) 250 mg 180 Capsules by Nutriota",
+      "price": "€20.17",
+      "image": "https://m.media-amazon.com/images/I/61x3qasoXDL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "link": "https://www.amazon.de/dp/B0CKTYJJ4M"
     },
     {
-      "id": 3,
-      "category": t('products.vitamins'),
-      "name": "Nutriota Vitamin B3 (Nicotinamide) | 54 mg (180 Capsules)",
-      "price": "€13.90",
-      "image": "https://m.media-amazon.com/images/I/61zrLu+FSbL._AC_SY300_SX300_.jpg",
-      "link": "https://www.amazon.it/dp/B0CK4XFPP9"
+      "category": "Supplements",
+      "name": "Nutriota Propolis 1000 mg 180 Tablets by Nutriota",
+      "price": "€18.15",
+      "image": "https://m.media-amazon.com/images/I/610Xy2Pk7DL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "link": "https://www.amazon.de/dp/B08428DH3Z"
     },
     {
-      "id": 4,
-      "category": t('products.supplements'),
-      "name": "Nutriota Propolis | 1000 mg (180 Capsules)",
-      "price": "€17.79",
-      "image": "https://m.media-amazon.com/images/I/617gq7K4abL.__AC_SX300_SY300_QL70_ML2_.jpg",
-      "link": "https://www.amazon.it/dp/B08TB387M9"
+      "category": "Vitamins",
+      "name": "Nutriota Vitamin B6 12.5 mg 365 Tablets by Nutriota",
+      "price": "€14.03",
+      "image": "https://m.media-amazon.com/images/I/51d2cbMwKkL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "link": "https://www.amazon.de/dp/B08B121XGR"
     },
     {
-      "id": 5,
-      "category": t('products.supplements'),
-      "name": "Nutriota Alpha Lipoic Acid | 500 mg (180 Capsules)",
-      "price": "€29.90",
-      "image": "https://m.media-amazon.com/images/I/61GtNp-NvGL.__AC_SX300_SY300_QL70_ML2_.jpg",
-      "link": "https://www.amazon.it/dp/B081D2SPVF"
+      "category": "Vitamins",
+      "name": "Nutriota Vitamin B1 (Thiamine) 100 mg 180 Capsules by Nutriota",
+      "price": "€12.11",
+      "image": "https://m.media-amazon.com/images/I/61aqUq5-yfL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "link": "https://www.amazon.de/dp/B0D673DJR7"
     },
     {
-      "id": 6,
-      "category": t('products.vitamins'),
-      "name": "Nutriota Vitamin B1 | 25 mg (180 Capsules)",
-      "price": "€11.99",
-      "image": "https://m.media-amazon.com/images/I/61VsBeBnpML.__AC_SX300_SY300_QL70_ML2_.jpg",
-      "link": "https://www.amazon.it/dp/B0CNKKJF5M"
+      "category": "Vitamins",
+      "name": "Nutriota Vitamin B1 (Thiamine) 200 mg 180 Tablets by Nutriota",
+      "price": "€14.12",
+      "image": "https://m.media-amazon.com/images/I/51xKfXcSPDL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "link": "https://www.amazon.de/dp/B0D5XYTPXD"
     },
     {
-      "id": 7,
-      "category": t('products.herbalSupplements'),
-      "name": "Nutriota Echinacea | 500 mg (240 Tablets)",
-      "price": "€19.79",
-      "image": "https://m.media-amazon.com/images/I/61330aWtIEL.__AC_SX300_SY300_QL70_ML2_.jpg",
-      "link": "https://www.amazon.it/dp/B09PNK3GRH"
+      "category": "Supplements",
+      "name": "Nutriota Propolis 1000 mg 90 Capsules by Nutriota",
+      "price": "€16.95",
+      "image": "https://m.media-amazon.com/images/I/61ZO2+TLSPL._AC_SY300_SX300_.jpg",
+      "link": "https://www.amazon.de/dp/B09L3SH83Z"
     },
     {
-      "id": 8,
-      "category": t('products.minerals'),
-      "name": "Nutriota Selencora (Selenium w/ Zinc and Copper) | (180 Capsules)",
-      "price": "€10.99",
-      "image": "https://m.media-amazon.com/images/I/61Sdenl4g5L.__AC_SX300_SY300_QL70_ML2_.jpg",
-      "link": "https://www.amazon.it/dp/B0CT64JJ1N"
+      "category": "Herbal Supplements",
+      "name": "Nutriota Echinacea 500 mg 240 Tablets by Nutriota",
+      "price": "€20.17",
+      "image": "https://m.media-amazon.com/images/I/6175SKfTVaL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "link": "https://www.amazon.de/dp/B08B16GMQ3"
     },
     {
-      "id": 9,
-      "category": t('products.supplements'),
-      "name": "Nutriota Royal Jelly | 250 mg (120 Capsules)",
-      "price": "€24.99",
-      "image": "https://m.media-amazon.com/images/I/61o7Po1LO5L.__AC_SX300_SY300_QL70_ML2_.jpg",
-      "link": "https://www.amazon.it/dp/B08W44Q351"
+      "category": "Supplements",
+      "name": "Nutriota ZMA (Zinc (10 mg) + Magnesium (187.5 mg) + Vitamin B6 (6 mg)) 120 Capsules by Nutriota",
+      "price": "€9.98",
+      "image": "https://m.media-amazon.com/images/I/61-RHjTQvaL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "link": "https://www.amazon.de/dp/B0DGMD369V"
     }
   ];
 
   const carouselItems = [
-    { id: 1, titleKey: "carousel.vitamins.title", descriptionKey: "carousel.vitamins.description", image: "/images/VitaminHeaderItaly.jpg", productId: 2 },
-    { id: 2, titleKey: "carousel.supplements.title", descriptionKey: "carousel.supplements.description", image: "/images/SupplementsHeaderItaly.jpg", productId: 4 },
-    { id: 3, titleKey: "carousel.herbalSupplements.title", descriptionKey: "carousel.herbalSupplements.description", image: "/images/HerbalHeaderItaly.jpg", productId: 7 },
-    { id: 4, titleKey: "carousel.minerals.title", descriptionKey: "carousel.minerals.description", image: "/images/MineralsHeaderItaly.jpg", productId: 8 }
+    { id: 1, titleKey: "carousel.vitamins.title", descriptionKey: "carousel.vitamins.description", image: "/images/GermanVitaminHeader.jpg" },
+    { id: 2, titleKey: "carousel.supplements.title", descriptionKey: "carousel.supplements.description", image: "/images/GermanSupplementHeader.jpg" },
+    { id: 3, titleKey: "carousel.herbalSupplements.title", descriptionKey: "carousel.herbalSupplements.description", image: "/images/GermanHerbalHeader.jpg" }
   ];
 
   useEffect(() => {
@@ -240,7 +222,11 @@ const Header = () => {
   };
 
   const handleProductClick = (product: any) => {
-    router.push(`/product${product.id}`);
+    // Find the product index to redirect to the correct product page
+    const productIndex = products.findIndex(p => p.name === product.name);
+    if (productIndex !== -1) {
+      router.push(`/product${productIndex + 1}`);
+    }
     setSearchQuery('');
     setShowSearchResults(false);
     setIsSearchOpen(false);
@@ -252,20 +238,8 @@ const Header = () => {
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + carouselItems.length) % carouselItems.length);
 
   const handleCategoryClick = (category: string) => {
-    if (category === t('products.allProducts')) {
-      router.push('/products');
-    } else {
-      // Map translated category back to English for URL
-      const reverseCategoryMap: { [key: string]: string } = {
-        [t('products.allProducts')]: 'All Products',
-        [t('products.minerals')]: 'Minerals',
-        [t('products.vitamins')]: 'Vitamins',
-        [t('products.supplements')]: 'Supplements',
-        [t('products.herbalSupplements')]: 'Herbal Supplements'
-      };
-      const englishCategory = reverseCategoryMap[category] || category;
-      router.push(`/products?category=${encodeURIComponent(englishCategory)}`);
-    }
+            if (category === 'All Products') router.push('/products');
+        else router.push(`/products?category=${encodeURIComponent(category)}`);
     setIsProductsOpen(false);
     setIsMenuOpen(false);
   };
@@ -274,7 +248,7 @@ const Header = () => {
   const handleMobileLanguageToggle = () => {
     if (isLanguageLoading) return;
     
-    const targetLanguage = selectedLanguage.code === 'it' ? 'en' : 'it';
+    const targetLanguage = selectedLanguage.code === 'de' ? 'en' : 'de';
     handleLanguageChange(targetLanguage);
   };
 
@@ -309,11 +283,10 @@ const Header = () => {
                       <div className="w-1/3 p-6 border-r border-gray-100">
                         <div className="space-y-1">
                           <div className="text-lg font-bold text-gray-900 mb-4 cursor-default">{t('products.categories')}</div>
-                          <button onClick={() => handleCategoryClick(t('products.minerals'))} className="block w-full text-left py-2 px-3 text-gray-700 hover:text-[#0089CF] hover:bg-blue-50 rounded-lg transition-all duration-200 font-medium">{t('products.minerals')}</button>
-                                                      <button onClick={() => handleCategoryClick(t('products.vitamins'))} className="block w-full text-left py-2 px-3 text-gray-700 hover:text-[#0089CF] hover:bg-blue-50 rounded-lg transition-all duration-200 font-medium">{t('products.vitamins')}</button>
-                            <button onClick={() => handleCategoryClick(t('products.supplements'))} className="block w-full text-left py-2 px-3 text-gray-700 hover:text-[#0089CF] hover:bg-blue-50 rounded-lg transition-all duration-200 font-medium">{t('products.supplements')}</button>
-                            <button onClick={() => handleCategoryClick(t('products.herbalSupplements'))} className="block w-full text-left py-2 px-3 text-gray-700 hover:text-[#0089CF] hover:bg-blue-50 rounded-lg transition-all duration-200 font-medium">{t('products.herbalSupplements')}</button>
-                            <button onClick={() => handleCategoryClick(t('products.allProducts'))} className="block w-full text-left py-2 px-3 text-gray-700 hover:text-[#0089CF] hover:bg-blue-50 rounded-lg transition-all duration-200 font-medium">{t('products.allProducts')}</button>
+                          <button onClick={() => handleCategoryClick('Vitamins')} className="block w-full text-left py-2 px-3 text-gray-700 hover:text-[#0089CF] hover:bg-blue-50 rounded-lg transition-all duration-200 font-medium">{t('products.vitamins')}</button>
+                          <button onClick={() => handleCategoryClick('Supplements')} className="block w-full text-left py-2 px-3 text-gray-700 hover:text-[#0089CF] hover:bg-blue-50 rounded-lg transition-all duration-200 font-medium">{t('products.supplements')}</button>
+                          <button onClick={() => handleCategoryClick('Herbal Supplements')} className="block w-full text-left py-2 px-3 text-gray-700 hover:text-[#0089CF] hover:bg-blue-50 rounded-lg transition-all duration-200 font-medium">{t('products.herbalSupplements')}</button>
+                          <button onClick={() => handleCategoryClick('All Products')} className="block w-full text-left py-2 px-3 text-gray-700 hover:text-[#0089CF] hover:bg-blue-50 rounded-lg transition-all duration-200 font-medium">{t('products.allProducts')}</button>
                         </div>
                       </div>
                       <div className="w-2/3 p-6">
@@ -322,28 +295,24 @@ const Header = () => {
                             {carouselItems.map((item) => (
                               <div key={item.id} className="w-full flex-shrink-0 flex items-center justify-between px-8">
                                 <div className="flex-1">
-                                  <Link href={`/product${item.productId}`} className="block hover:opacity-80 transition-opacity duration-200">
-                                    <h3 className={`font-bold text-gray-900 mb-2 leading-tight cursor-pointer ${
-                                      t(item.titleKey).length > 20 ? 'text-lg' : 'text-2xl'
-                                    }`}>
-                                      {t(item.titleKey)}
-                                    </h3>
-                                    <p className={`text-gray-600 leading-relaxed ${
-                                      t(item.descriptionKey).length > 60 ? 'text-xs' : 'text-sm'
-                                    }`}>
-                                      {t(item.descriptionKey)}
-                                    </p>
-                                  </Link>
+                                  <h3 className={`font-bold text-gray-900 mb-2 leading-tight ${
+                                    t(item.titleKey).length > 20 ? 'text-lg' : 'text-2xl'
+                                  }`}>
+                                    {t(item.titleKey)}
+                                  </h3>
+                                  <p className={`text-gray-600 leading-relaxed ${
+                                    t(item.descriptionKey).length > 60 ? 'text-xs' : 'text-sm'
+                                  }`}>
+                                    {t(item.descriptionKey)}
+                                  </p>
                                 </div>
                                 <div className="flex-shrink-0 ml-6">
-                                  <Link href={`/product${item.productId}`} className="block hover:opacity-80 transition-opacity duration-200">
-                                    <OptimizedImage
-                                      src={item.image}
-                                      alt={t(item.titleKey)}
-                                      className="w-32 h-32 lg:w-40 lg:h-40 rounded-lg shadow-lg cursor-pointer"
-                                      loading="lazy"
-                                    />
-                                  </Link>
+                                  <OptimizedImage
+                                    src={item.image}
+                                    alt={t(item.titleKey)}
+                                    className="w-32 h-32 lg:w-40 lg:h-40 rounded-lg shadow-lg"
+                                    loading="lazy"
+                                  />
                                 </div>
                               </div>
                             ))}
@@ -412,6 +381,7 @@ const Header = () => {
                                 <span className="text-sm font-semibold text-gray-900">{product.price}</span>
                               </div>
                             </div>
+
                           </button>
                         ))}
                       </div>
@@ -433,20 +403,20 @@ const Header = () => {
               </button>
               {isLanguageOpen && (
                 <div className="absolute top-full right-0 mt-2 w-full bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50">
-                  {/* Changed order: Italiano first, then English */}
+                  {/* Changed order: Deutsch first, then English */}
                   <button 
                     onClick={() => {
                       if (!isLanguageLoading) {
-                        handleLanguageChange('it');
+                        handleLanguageChange('de');
                         setIsLanguageOpen(false);
                       }
                     }} 
                     className="w-full text-left flex items-center space-x-3 px-3 py-2 text-gray-700 hover:text-[#0089CF] hover:bg-gray-50 transition-colors duration-200"
                     disabled={isLanguageLoading}
                   >
-                    <span className="text-lg">🇮🇹</span>
-                    <span className="font-medium text-sm truncate">Italiano</span>
-                    {isLanguageLoading && selectedLanguage.code !== 'it' && (
+                    <span className="text-lg">🇩🇪</span>
+                    <span className="font-medium text-sm truncate">Deutsch</span>
+                    {isLanguageLoading && selectedLanguage.code !== 'de' && (
                       <div className="ml-auto animate-spin rounded-full h-3 w-3 border-b-2 border-[#0089CF]"></div>
                     )}
                   </button>
@@ -485,7 +455,7 @@ const Header = () => {
                 disabled={isLanguageLoading}
               >
                 <span className="text-xl">
-                  {selectedLanguage.code === 'it' ? '🇬🇧' : '🇮🇹'}
+                  {selectedLanguage.code === 'de' ? '🇬🇧' : '🇩🇪'}
                 </span>
                 {isLanguageLoading && (
                   <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80 rounded-full">
@@ -550,6 +520,7 @@ const Header = () => {
                               <span className="text-sm font-semibold text-gray-900">{product.price}</span>
                             </div>
                           </div>
+
                         </button>
                       ))}
                     </div>
@@ -574,19 +545,16 @@ const Header = () => {
                 
                 {/* Product options (no categories) */}
                 <div className="ml-4 flex flex-col space-y-1">
-                  <button onClick={() => handleCategoryClick(t('products.vitamins'))} className="text-gray-700 hover:text-[#0089CF] transition-colors duration-200 text-left py-3 px-4 font-medium text-lg">
+                  <button onClick={() => handleCategoryClick('Vitamins')} className="text-gray-700 hover:text-[#0089CF] transition-colors duration-200 text-left py-3 px-4 font-medium text-lg">
                     {t('products.vitamins')}
                   </button>
-                  <button onClick={() => handleCategoryClick(t('products.supplements'))} className="text-gray-700 hover:text-[#0089CF] transition-colors duration-200 text-left py-3 px-4 font-medium text-lg">
+                  <button onClick={() => handleCategoryClick('Supplements')} className="text-gray-700 hover:text-[#0089CF] transition-colors duration-200 text-left py-3 px-4 font-medium text-lg">
                     {t('products.supplements')}
                   </button>
-                  <button onClick={() => handleCategoryClick(t('products.herbalSupplements'))} className="text-gray-700 hover:text-[#0089CF] transition-colors duration-200 text-left py-3 px-4 font-medium text-lg">
+                  <button onClick={() => handleCategoryClick('Herbal Supplements')} className="text-gray-700 hover:text-[#0089CF] transition-colors duration-200 text-left py-3 px-4 font-medium text-lg">
                     {t('products.herbalSupplements')}
                   </button>
-                  <button onClick={() => handleCategoryClick(t('products.minerals'))} className="text-gray-700 hover:text-[#0089CF] transition-colors duration-200 text-left py-3 px-4 font-medium text-lg">
-                    {t('products.minerals')}
-                  </button>
-                  <button onClick={() => handleCategoryClick(t('products.allProducts'))} className="text-gray-700 hover:text-[#0089CF] transition-colors duration-200 text-left py-3 px-4 font-medium text-lg">
+                  <button onClick={() => handleCategoryClick('All Products')} className="text-gray-700 hover:text-[#0089CF] transition-colors duration-200 text-left py-3 px-4 font-medium text-lg">
                     {t('products.allProducts')}
                   </button>
                 </div>

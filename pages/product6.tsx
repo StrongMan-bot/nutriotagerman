@@ -11,9 +11,7 @@ export default function Product6Page() {
         <meta name="keywords" content="vitamin b1, thiamine, nervous system, energy metabolism, dietary supplement, Nutriota, vitamins" />
       </Head>
       <ProductDetail 
-        productId={6}
-        amazonLink="https://www.amazon.it/dp/B0CNKKJF5M"
-        productImage="https://m.media-amazon.com/images/I/61VsBeBnpML.__AC_SX300_SY300_QL70_ML2_.jpg"
+        productId="6"
       />
     </>
   );

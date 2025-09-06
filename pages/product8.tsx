@@ -11,9 +11,7 @@ export default function Product8Page() {
         <meta name="keywords" content="selenium, zinc, copper, minerals, antioxidant support, immune health, dietary supplement, Nutriota, minerals" />
       </Head>
       <ProductDetail 
-        productId={8}
-        amazonLink="https://www.amazon.it/dp/B0CT64JJ1N"
-        productImage="https://m.media-amazon.com/images/I/61Sdenl4g5L.__AC_SX300_SY300_QL70_ML2_.jpg"
+        productId="8"
       />
     </>
   );

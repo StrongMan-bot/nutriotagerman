@@ -13,12 +13,17 @@ const Hero = () => {
     router.push('/products');
   };
 
-  // Hero slides data - removed the second slide
+  // Hero slides data
   const heroSlides = [
     {
       id: 1,
-      image: "/images/HeroSectionItaly2.webp",
+      image: "/images/HeroSectionGerman3.webp",
       alt: "NUTRIOTA supplement bottle with natural background"
+    },
+    {
+      id: 2,
+      image: "/images/HeroSectionGerman2.webp",
+      alt: "NUTRIOTA Sport supplement with performance background"
     }
   ];
 
@@ -95,26 +100,24 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Navigation Arrows - Removed since there's only one slide */}
-      {heroSlides.length > 1 && (
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex items-center space-x-2 z-20">
-          <button 
-            onClick={prevSlide}
-            className="bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-2 text-white transition-all duration-200"
-            aria-label="Previous slide"
-          >
-            <ChevronLeft size={16} />
-          </button>
-          
-          <button 
-            onClick={nextSlide}
-            className="bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-2 text-white transition-all duration-200"
-            aria-label="Next slide"
-          >
-            <ChevronRight size={16} />
-          </button>
-        </div>
-      )}
+      {/* Navigation Arrows - Centered below the picture */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex items-center space-x-2 z-20">
+        <button 
+          onClick={prevSlide}
+          className="bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-2 text-white transition-all duration-200"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft size={16} />
+        </button>
+        
+        <button 
+          onClick={nextSlide}
+          className="bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-2 text-white transition-all duration-200"
+          aria-label="Next slide"
+        >
+          <ChevronRight size={16} />
+        </button>
+      </div>
     </section>
   );
 };

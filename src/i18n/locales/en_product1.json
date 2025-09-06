@@ -1,16 +1,16 @@
 {
-    "title": "Nutriota Chromium Picolinate | 250 mcg (365 Tablets)",
-    "category": "Minerals",
-    "price": "€23.79",
-    "rating": "4.5",
-    "ratingsCount": "300+",
-    "buyOnAmazon": "Buy on Amazon",
-    "aboutThisItem": "About this Item",
-    "productDescription": "Product Description",
-    "ingredients": "Ingredients",
-    "generalInformation": "General Information",
-    "aboutContent": "HIGH CONCENTRATION CHROMIUM PICOLINATE 250 MCG PER TABLET - Our vegan chromium supplement contains 250 mcg of chromium picolinate per tablet. Each bottle contains 365 easy to take tablets, equivalent to a 12 month supply at an excellent value for money. A chromium supplement is essential to help regulate macronutrient metabolism and maintain normal blood glucose levels.",
-    "descriptionContent": "Chromium is an essential trace element naturally contained in many foods, although in small quantities. Our easy to swallow tablets are suitable for vegetarians and vegans and allow you to benefit from the positive effects of chromium.",
-    "ingredientsContent": "Chromium picolinate, bulking agents (magnesium salts of fatty acids, calcium phosphates), anti-caking agent (microcrystalline cellulose)",
-    "generalInfoContent": "Package Dimensions: 8.7 x 4.6 x 4.5 cm; 54.8 g\nUnits: 365.00 Count\nBrand: Nutriota\nFormat: Tablet\nAge Range Description: Adult\nManufacturer: Nutriota\nASIN: B0C8G7Y1D6"
-  }
+  "aboutItem": "About this item",
+  "productDescription": "Product description",
+  "ingredients": "Ingredients",
+  "generalInformation": "General Information",
+  "backToProducts": "Back to Products",
+  "buyOnAmazon": "Buy on Amazon",
+  "exploreMoreProducts": "Explore More Products",
+  "exploreMoreDescription": "Discover our full range of premium vitamins and supplements",
+  "viewAllProducts": "View All Products",
+  "category": "Supplements",
+  "aboutContent": "Each serving contains 500 mg of pure ALA, which lowers blood sugar levels, strengthens the nervous system and slows natural ageing processes. The product is suitable for vegans and vegetarians. A bottle of 180 capsules offers six months supply and excellent value. Our supplements are GMP compliant, manufactured in certified facilities meeting strict UK and EU regulations. Through our dietary supplement, your body receives the amount of ALA it needs to cope with free radicals.",
+  "descriptionContent": "Nutriota Alpha Lipoic Acid ALA 500 mg offers 180 high-dose vegan capsules that help with inflammation, support blood sugar regulation and nerve health, and are effective against tingling in feet, hands, and limbs. This powerful antioxidant promotes healthy nerve function, positively affects blood sugar and memory, stimulates blood circulation, and can slow skin ageing. It can even support weight loss goals. Since our body naturally produces very little ALA, this supplement provides the essential amount needed for optimal health.",
+  "ingredientsContent": "Alpha lipoic acid 500 mg, release agent: magnesium stearate, silicon dioxide, capsule shell: hydroxypropylmethylcellulose",
+  "informationContent": "Units: 180 count | Brand: Nutriota | Format: Capsule | Age Range Description: Adult | Country of origin: United Kingdom"
+}

@@ -1,47 +1,65 @@
 {
-  "title": "What customers say",
+  "title": "What People Are Saying",
   "testimonials": [
     {
-      "name": "angela c.",
+      "name": "volker-bln 9",
+      "gender": "male",
+      "title": "Highly recommended product",
+      "quote": "Quality product and not overpriced taken regularly. Does it help to lower diabetes levels somewhat? I was skeptical at first, but was proven wrong after three months."
+    },
+    {
+      "name": "M van den Berg",
+      "gender": "male",
+      "title": "In my opinion, a good product.",
+      "quote": "I am not a specialist but I purchased the product to see how it works for my daughter with epilepsy, I observe her every day and I notice that since she has received 1 capsule a day, she has not had an epileptic seizure for a few days, even though she has had a regular seizure."
+    },
+    {
+      "name": "H.G.",
       "gender": "female",
-      "title": "Real royal jelly",
-      "quote": "I love bees and so I decided to rely on them to fight my low energy. I opened the bottle and immediately smelled its sweet scent and was happy about it. I've been taking it for a few days now and I have to say that the difference is noticeable. I'm less tired. The product is ok and I won't abandon it easily. Excellent shipping and small capsules easy to swallow."
+      "title": "Very effective",
+      "quote": "We have already bought these vitamins for the second time. They improve blood circulation, and well-being is also improved. We can absolutely recommend it. The price-performance ratio is right, shipping was immediate. Thank you so much!"
     },
     {
-      "name": "Gabriella Longega",
-      "gender": "male",
-      "title": "Excellent for keeping fit",
-      "quote": "Well packaged product. Capsules easy to swallow. I use it constantly to improve immune defenses."
-    },
-    {
-      "name": "soul.food",
+      "name": "roteblume",
       "gender": "female",
-      "title": "Recommended",
-      "quote": "Recommended. Before buying this product I took a much more expensive supplement with echinacea daily for about a year, for about 4 months I've chosen this cheaper one with only echinacea. In the past 6/7 years I caught every seasonal illness (and I don't have children who going to school can bring home flu and colds). This winter I spent it unscathed. Be patient! Being a natural product it needs time, and I mean several months."
+      "title": "Vit.B1",
+      "quote": "Delivery on time. I take Vit.B1 with 250 mg contents/capsule to cope with sensory disorders on the tips of my fingers. Together with physical therapy exercises, it seems to be working. The capsules are easy to swallow, the container is a dark brown plastic bottle, necessary as Vit B1 is sensitive to light/solar radiation."
     },
     {
-      "name": "wolf",
+      "name": "Amazon Kunde",
       "gender": "male",
-      "title": "Echinacea great quality",
-      "quote": "I've been buying them for years now and I take one every morning. Excellent product that preserves me a lot from seasonal illnesses. Very good quality price. Highly recommended. Sometimes I let myself be convinced by promo discounts but I always came back."
+      "title": "Home remedy",
+      "quote": "Finding is a good product. Nature is better than synthetic products (medicines) 🤓🤓🤓🤓🤓🤓🤓"
     },
     {
-      "name": "RICCARDO HEUSCH",
-      "gender": "male",
-      "title": "Vitamin B6",
-      "quote": "Excellent quality price ratio. The tablets even if a bit large are easily swallowable. Being a supplement it takes time to evaluate its benefits."
+      "name": "Gigi",
+      "gender": "female",
+      "title": "Good value for money",
+      "quote": "I can't say much about the long-term effect, but the size and dosage are great."
     },
     {
-      "name": "Feciale Massimo",
-      "gender": "male",
-      "title": "Vitamins",
-      "quote": "The product met my expectations, and arrived within the expected times."
+      "name": "Elke",
+      "gender": "female",
+      "title": "Absolutely right now in autumn!",
+      "quote": "Especially now during the cold season, I swear by it. When I start to scratch my throat quietly or feel like I'm getting sick, I take these pills and everything will be all right again."
     },
     {
-      "name": "roberto gasparri",
+      "name": "Amazon Kunde",
       "gender": "male",
-      "title": "Excellent product",
-      "quote": "Convenient in easily swallowable capsules and easy to give even to my children when they are a bit tired during the change of season. A month of treatment is enough and iron levels in the blood rise immediately. For me instead I use it regularly before and after my period to compensate for the lowering of iron levels and limit tiredness. I've been using it for a long time and I find it really effective."
+      "title": "Top price/performance 👍",
+      "quote": "I can't say much yet because I just received these Echinacea capsules last week, but last night I had burning eyes and runny nose. It's the first sign that I've caught something. Taken 1 tablet immediately. Slept well and no further symptoms yet. Unfortunately I have a very poor immune system in general and was really surprised this morning that there was immediate effect..."
+    },
+    {
+      "name": "Alexander",
+      "gender": "male",
+      "title": "Actually works",
+      "quote": "I've been looking for a cheap alternative to liposomal silicon and am very satisfied. The product does indeed work. After taking them sporadically for less than 2 weeks, my nails are strong and elastic again, have grown long and do not split anymore. (Bonus... surprisingly, the lashes also grow)"
+    },
+    {
+      "name": "Hannelore Koppenburg",
+      "gender": "female",
+      "title": "Quick delivery",
+      "quote": "They help me well. Was skeptical at first. One person found this helpful."
     }
   ]
 }
