@@ -6,17 +6,22 @@ import OptimizedImage from './OptimizedImage';
 import { Star, ExternalLink } from 'lucide-react'; // Import Star and ExternalLink icons
 
 // Memoized ProductCard component for better performance
-const ProductCard = memo(({ product, index, t, router, renderStars, bestSellerProducts }: {
+const ProductCard = memo(({ product, index, t, router, renderStars, bestSellerProducts, allProducts }: {
   product: any;
   index: number;
   t: any;
   router: any;
   renderStars: (rating: number) => React.ReactNode;
   bestSellerProducts: string[];
+  allProducts: any[];
 }) => {
   const handleProductClick = useCallback(() => {
-    router.push(`/product${index + 1}`);
-  }, [router, index]);
+    // Find the actual product index in the original products array
+    const actualIndex = allProducts.findIndex(p => p.name === product.name);
+    if (actualIndex !== -1) {
+      router.push(`/products/${actualIndex + 1}`);
+    }
+  }, [router, product.name, allProducts]);
 
   return (
     <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group">
@@ -363,6 +368,7 @@ const Products = () => {
                   router={router}
                   renderStars={renderStars}
                   bestSellerProducts={bestSellerProducts}
+                  allProducts={products}
                 />
               ))}
             </div>

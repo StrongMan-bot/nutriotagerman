@@ -103,7 +103,7 @@ const BestSellers = () => {
             <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group border border-gray-100">
               <div 
                 className="relative h-48 overflow-hidden cursor-pointer"
-                onClick={() => router.push(`/product${product.id}`)}
+                onClick={() => router.push(`/products/${product.id}`)}
               >
                 <OptimizedImage
                   src={product.image}
@@ -128,7 +128,7 @@ const BestSellers = () => {
               <div className="p-6">
                 <h3 
                   className="text-base font-semibold text-gray-900 mb-3 line-clamp-2 cursor-pointer hover:text-[#0089CF] transition-colors"
-                  onClick={() => router.push(`/product${product.id}`)}
+                  onClick={() => router.push(`/products/${product.id}`)}
                 >
                   {product.name}
                 </h3>

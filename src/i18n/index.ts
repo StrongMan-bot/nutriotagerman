@@ -46,6 +46,16 @@ import de_product8 from './locales/de_product8.json';
 import en_product8 from './locales/en_product8.json';
 import de_product9 from './locales/de_product9.json';
 import en_product9 from './locales/en_product9.json';
+import de_product10 from './locales/de_product10.json';
+import en_product10 from './locales/en_product10.json';
+import de_product11 from './locales/de_product11.json';
+import en_product11 from './locales/en_product11.json';
+import de_product12 from './locales/de_product12.json';
+import en_product12 from './locales/en_product12.json';
+import de_product13 from './locales/de_product13.json';
+import en_product13 from './locales/en_product13.json';
+import de_product14 from './locales/de_product14.json';
+import en_product14 from './locales/en_product14.json';
 
 const resources = {
   de: {
@@ -69,7 +79,12 @@ const resources = {
     product6: de_product6,
     product7: de_product7,
     product8: de_product8,
-    product9: de_product9
+    product9: de_product9,
+    product10: de_product10,
+    product11: de_product11,
+    product12: de_product12,
+    product13: de_product13,
+    product14: de_product14
   },
   en: {
     translation: en,
@@ -92,7 +107,12 @@ const resources = {
     product6: en_product6,
     product7: en_product7,
     product8: en_product8,
-    product9: en_product9
+    product9: en_product9,
+    product10: en_product10,
+    product11: en_product11,
+    product12: en_product12,
+    product13: en_product13,
+    product14: en_product14
   }
 };
 

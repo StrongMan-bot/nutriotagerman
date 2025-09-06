@@ -140,6 +140,34 @@ const Header = () => {
       "price": "€9.98",
       "image": "https://m.media-amazon.com/images/I/61-RHjTQvaL.__AC_SX300_SY300_QL70_ML2_.jpg",
       "link": "https://www.amazon.de/dp/B0DGMD369V"
+    },
+    {
+      "category": "Vitamins",
+      "name": "Nutriota Vitamin B2 (Riboflavin) 250 mg 180 Capsules by Nutriota",
+      "price": "€30.27",
+      "image": "https://m.media-amazon.com/images/I/61dMCF-WIdL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "link": "https://www.amazon.de/dp/B0CXJ3CK9K"
+    },
+    {
+      "category": "Supplements",
+      "name": "Nutriota Shilajit 1500 mg 180 Capsules by Nutriota",
+      "price": "€22.45",
+      "image": "https://m.media-amazon.com/images/I/61qXpAC5jlL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "link": "https://www.amazon.de/dp/B0D1RBLDZS"
+    },
+    {
+      "category": "Supplements",
+      "name": "Nutriota Silica 250 mg (120 Capsules) by Nutriota",
+      "price": "€25.23",
+      "image": "https://m.media-amazon.com/images/I/61LsVX06PkL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "link": "https://www.amazon.de/dp/B09ZVP7LCM"
+    },
+    {
+      "category": "Vitamins",
+      "name": "Nutriota Vitamin B5 (Pantothenic Acid) 500 mg 120 Capsules by Nutriota",
+      "price": "€25.23",
+      "image": "https://m.media-amazon.com/images/I/61L25cJYjoL.__AC_SX300_SY300_QL70_ML2_.jpg",
+      "link": "https://www.amazon.de/dp/B0D4LZ9WBC"
     }
   ];
 
@@ -225,7 +253,7 @@ const Header = () => {
     // Find the product index to redirect to the correct product page
     const productIndex = products.findIndex(p => p.name === product.name);
     if (productIndex !== -1) {
-      router.push(`/product${productIndex + 1}`);
+      router.push(`/products/${productIndex + 1}`);
     }
     setSearchQuery('');
     setShowSearchResults(false);
