@@ -54,11 +54,27 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
     // For priority images, start loading immediately
     if (priority && imgRef.current) {
       const img = new window.Image();
+      img.crossOrigin = 'anonymous'; // Handle CORS for external images
       img.src = src;
       img.onload = handleImageLoad;
       img.onerror = handleImageError;
     }
   }, [src, priority]);
+
+  // Preload images for better performance
+  useEffect(() => {
+    if (src && !imageLoaded && !imageError) {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = src;
+      document.head.appendChild(link);
+      
+      return () => {
+        document.head.removeChild(link);
+      };
+    }
+  }, [src, imageLoaded, imageError]);
 
   return (
     <div className={`relative overflow-hidden ${className}`}>
@@ -90,6 +106,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
           onError={handleImageError}
           width={width}
           height={height}
+          crossOrigin="anonymous"
         />
       )}
       

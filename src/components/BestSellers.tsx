@@ -93,7 +93,8 @@ const BestSellers = () => {
                     src={product.image}
                     alt={product.name}
                     className="w-full h-full object-contain p-4"
-                    loading="lazy"
+                    loading="eager"
+                    priority={true}
                   />
                   <div className="absolute top-4 right-4">
                     <span className="bg-blue-100 text-[#0089CF] px-2 py-1 rounded-full text-xs font-medium">
