@@ -18,7 +18,7 @@ const About = () => {
           {/* Image - Left Side */}
           <div className="order-1">
             <OptimizedImage
-              src="/images/AboutUsItaly.png"
+              src="/images/AboutUsItaly.webp"
               alt="Premium supplement bottles with natural botanical background"
               className="w-full h-80 md:h-96 rounded-xl shadow-lg"
               priority={true}

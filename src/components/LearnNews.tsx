@@ -13,17 +13,17 @@ const LearnNews = () => {
     {
       id: 1,
       icon: <Zap className="w-6 h-6" />,
-      image: "/images/NewsDetail1.jpg",
+      image: "/images/NewsDetail1.webp",
     },
     {
       id: 2,
       icon: <Leaf className="w-6 h-6" />,
-      image: "/images/NewsDetail2.jpg",
+      image: "/images/NewsDetail2.webp",
     },
     {
       id: 3,
       icon: <BookOpen className="w-6 h-6" />,
-      image: "/images/NewsDetail3.jpg",
+      image: "/images/NewsDetail3.webp",
     }
   ];
 

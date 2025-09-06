@@ -14,7 +14,7 @@ const NewsDetail5 = () => {
     id: 5,
     title: t('title'),
     description: t('description'),
-    image: "/images/NewsDetail5.jpg",
+    image: "/images/NewsDetail5.webp",
     date: t('date'),
     category: t('category'),
     author: t('author'),

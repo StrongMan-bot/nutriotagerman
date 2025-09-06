@@ -14,7 +14,7 @@ const NewsDetail1 = () => {
     id: 1,
     title: t('title', 'La tua energia sta svanendo e non sai nemmeno perché: la crisi nascosta delle vitamine del gruppo B'),
     description: t('description', 'Sei sempre stanco? La nebbia cerebrale ti colpisce come un camion? Il tuo corpo potrebbe stare urlando aiuto. Scopri la crisi nascosta delle vitamine B che sta prosciugando la tua energia e come risolverla.'),
-    image: "/images/NewsDetail1.jpg",
+    image: "/images/NewsDetail1.webp",
     date: t('date', '15 Dicembre 2024'),
     category: t('category', 'Energia & Benessere'),
     author: t('author', 'Team Nutriota'),

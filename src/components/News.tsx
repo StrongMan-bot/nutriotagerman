@@ -15,7 +15,7 @@ const News = () => {
       id: 1,
       title: t('articles.article1.title'),
       description: t('articles.article1.description'),
-      image: "/images/NewsDetail1.jpg",
+      image: "/images/NewsDetail1.webp",
       date: t('articles.article1.date'),
       category: t('articles.article1.category')
     },
@@ -23,7 +23,7 @@ const News = () => {
       id: 2,
       title: t('articles.article2.title'),
       description: t('articles.article2.description'),
-      image: "/images/NewsDetail2.jpg",
+      image: "/images/NewsDetail2.webp",
       date: t('articles.article2.date'),
       category: t('articles.article2.category')
     },
@@ -31,7 +31,7 @@ const News = () => {
       id: 3,
       title: t('articles.article3.title'),
       description: t('articles.article3.description'),
-      image: "/images/NewsDetail3.jpg",
+      image: "/images/NewsDetail3.webp",
       date: t('articles.article3.date'),
       category: t('articles.article3.category')
     },
@@ -39,7 +39,7 @@ const News = () => {
       id: 4,
       title: t('articles.article4.title'),
       description: t('articles.article4.description'),
-      image: "/images/NewsDetail4.jpg",
+      image: "/images/NewsDetail4.webp",
       date: t('articles.article4.category'),
       category: t('articles.article4.category')
     },
@@ -47,7 +47,7 @@ const News = () => {
       id: 5,
       title: t('articles.article5.title'),
       description: t('articles.article5.description'),
-      image: "/images/NewsDetail5.jpg",
+      image: "/images/NewsDetail5.webp",
       date: t('articles.article5.date'),
       category: t('articles.article5.category')
     },
@@ -55,7 +55,7 @@ const News = () => {
       id: 6,
       title: t('articles.article6.title'),
       description: t('articles.article6.description'),
-      image: "/images/NewsDetail6.jpg",
+      image: "/images/NewsDetail6.webp",
       date: t('articles.article6.date'),
       category: t('articles.article6.category')
     }

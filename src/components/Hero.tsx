@@ -17,7 +17,7 @@ const Hero = () => {
   const heroSlides = [
     {
       id: 1,
-      image: "/images/HeroSectionItaly2.png",
+      image: "/images/HeroSectionItaly2.webp",
       alt: "NUTRIOTA supplement bottle with natural background"
     }
   ];
