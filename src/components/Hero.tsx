@@ -8,6 +8,7 @@ const Hero = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   
   const handleShopNow = () => {
     router.push('/products');
@@ -27,18 +28,41 @@ const Hero = () => {
     }
   ];
 
-  // Auto-slide functionality disabled - only manual navigation
+  // Auto-scroll functionality - changes slide every 5 seconds
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, heroSlides.length]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    setIsAutoPlaying(false); // Pause auto-play when manually navigating
   };
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+    setIsAutoPlaying(false); // Pause auto-play when manually navigating
+  };
+
+  const handleMouseEnter = () => {
+    setIsAutoPlaying(false); // Pause auto-play on hover
+  };
+
+  const handleMouseLeave = () => {
+    setIsAutoPlaying(true); // Resume auto-play when mouse leaves
   };
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
+    <section 
+      className="relative min-h-screen flex items-center overflow-hidden pt-20"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       {/* Hero Carousel */}
       <div className="absolute inset-0 z-0">
         <div className="flex h-full transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
